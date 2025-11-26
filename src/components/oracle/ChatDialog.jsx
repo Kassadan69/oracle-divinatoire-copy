@@ -29,12 +29,12 @@ export default function ChatDialog({
   };
 
   return (
-    <div className="flex flex-col h-full bg-gradient-to-b from-[#1a0f0a]/95 to-[#0d0705]/95 rounded-xl border border-[#d4a84b]/30 overflow-hidden">
+    <div className="flex flex-col h-full bg-gradient-to-b from-[#fffef8] to-[#f4e4c1] rounded-xl border-2 border-[#8b6914]/40 overflow-hidden shadow-lg">
       {/* En-tête */}
-      <div className="px-4 py-3 border-b border-[#d4a84b]/20 bg-gradient-to-r from-[#2c1810] to-[#1a0f0a]">
+      <div className="px-4 py-3 border-b border-[#8b6914]/20 bg-gradient-to-r from-[#e8d4a8] to-[#f4e4c1]">
         <div className="flex items-center gap-2">
-          <Sparkles className="w-5 h-5 text-[#d4a84b]" />
-          <h3 className="text-[#d4a84b] font-serif font-bold">Dialogue avec l'Oracle</h3>
+          <Sparkles className="w-5 h-5 text-[#8b6914]" />
+          <h3 className="text-[#6b4423] font-serif font-bold">Dialogue avec l'Oracle</h3>
         </div>
       </div>
 
@@ -53,12 +53,12 @@ export default function ChatDialog({
                 <div
                   className={`max-w-[85%] rounded-2xl px-4 py-3 ${
                     message.role === 'user'
-                      ? 'bg-gradient-to-r from-[#d4a84b] to-[#b8860b] text-[#1a0f0a]'
-                      : 'bg-gradient-to-r from-[#2c1810] to-[#3d2618] text-[#e8d4a8] border border-[#d4a84b]/20'
+                      ? 'bg-gradient-to-r from-[#8b6914] to-[#6b4423] text-white'
+                      : 'bg-white/80 text-[#3d2914] border-2 border-[#8b6914]/30 shadow-sm'
                   }`}
                 >
                   {message.role === 'oracle' && (
-                    <div className="flex items-center gap-2 mb-2 text-[#d4a84b] text-xs font-serif">
+                    <div className="flex items-center gap-2 mb-2 text-[#8b6914] text-xs font-serif">
                       <span>𓂀</span>
                       <span>L'Oracle répond</span>
                     </div>
@@ -67,8 +67,8 @@ export default function ChatDialog({
                     <ReactMarkdown
                       components={{
                         p: ({ children }) => <p className="mb-2 last:mb-0 leading-relaxed">{children}</p>,
-                        strong: ({ children }) => <strong className="text-[#ffd700] font-bold">{children}</strong>,
-                        em: ({ children }) => <em className="text-[#e8d4a8] italic">{children}</em>,
+                        strong: ({ children }) => <strong className="text-[#8b6914] font-bold">{children}</strong>,
+                        em: ({ children }) => <em className="text-[#6b4423] italic">{children}</em>,
                       }}
                     >
                       {String(message.content || '')}
@@ -85,8 +85,8 @@ export default function ChatDialog({
               animate={{ opacity: 1 }}
               className="flex justify-start"
             >
-              <div className="bg-gradient-to-r from-[#2c1810] to-[#3d2618] rounded-2xl px-4 py-3 border border-[#d4a84b]/20">
-                <div className="flex items-center gap-2 text-[#d4a84b]">
+              <div className="bg-white/80 rounded-2xl px-4 py-3 border-2 border-[#8b6914]/30 shadow-sm">
+                <div className="flex items-center gap-2 text-[#8b6914]">
                   <Loader2 className="w-4 h-4 animate-spin" />
                   <span className="text-sm font-serif">L'Oracle médite...</span>
                 </div>
@@ -97,19 +97,19 @@ export default function ChatDialog({
       </ScrollArea>
 
       {/* Zone de saisie */}
-      <form onSubmit={handleSubmit} className="p-4 border-t border-[#d4a84b]/20 bg-[#1a0f0a]">
+      <form onSubmit={handleSubmit} className="p-4 border-t border-[#8b6914]/20 bg-[#e8d4a8]">
         <div className="flex gap-2">
           <Input
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder={placeholder}
             disabled={isLoading}
-            className="flex-1 bg-[#2c1810] border-[#d4a84b]/30 text-[#e8d4a8] placeholder:text-[#8b7355] focus:border-[#d4a84b] focus:ring-[#d4a84b]/20"
+            className="flex-1 bg-white border-[#8b6914]/40 text-[#3d2914] placeholder:text-[#a89070] focus:border-[#8b6914] focus:ring-[#8b6914]/20"
           />
           <Button
             type="submit"
             disabled={isLoading || !input.trim()}
-            className="bg-gradient-to-r from-[#d4a84b] to-[#b8860b] hover:from-[#e5b84d] hover:to-[#c99a0b] text-[#1a0f0a]"
+            className="bg-gradient-to-r from-[#8b6914] to-[#6b4423] hover:from-[#a07818] hover:to-[#7d5029] text-white"
           >
             <Send className="w-4 h-4" />
           </Button>

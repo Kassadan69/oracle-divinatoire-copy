@@ -66,7 +66,7 @@ export default function CardDeck({
   return (
     <div className="flex flex-col items-center space-y-6">
       {/* Instructions */}
-      <div className="text-center text-[#d4a84b] font-serif">
+      <div className="text-center text-[#6b4423] font-serif font-medium">
         {phase === 'initial' && "Mélangez les cartes pour commencer la consultation"}
         {phase === 'shuffling' && "Les cartes se mélangent..."}
         {phase === 'selecting' && `Sélectionnez ${numberOfCards - selectedCards.length} carte(s)`}
@@ -97,7 +97,7 @@ export default function CardDeck({
                 transition={{ delay: index * 0.2 }}
                 className="flex flex-col items-center"
               >
-                <div className="text-[#d4a84b] text-xs mb-1 font-serif">
+                <div className="text-[#6b4423] text-xs mb-1 font-serif font-medium">
                   Position {card.position}
                 </div>
                 <EgyptianCard

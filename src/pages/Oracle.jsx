@@ -137,13 +137,16 @@ Réponds à cette question en restant dans ton rôle d'Oracle Égyptien, en fais
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0d0705] via-[#1a0f0a] to-[#2c1810] relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-[#f4e4c1] via-[#e8d4a8] to-[#d4bc8a] relative overflow-hidden">
+      {/* Texture papyrus */}
+      <div className="absolute inset-0 opacity-30 bg-[url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noise%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noise)%22/%3E%3C/svg%3E')]"></div>
+      
       {/* Motifs décoratifs de fond */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-10 left-10 text-6xl text-[#d4a84b]">𓂀</div>
-        <div className="absolute top-20 right-20 text-4xl text-[#d4a84b]">𓆣</div>
-        <div className="absolute bottom-20 left-20 text-5xl text-[#d4a84b]">𓁹</div>
-        <div className="absolute bottom-10 right-10 text-6xl text-[#d4a84b]">𓊝</div>
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-10 left-10 text-6xl text-[#8b6914]">𓂀</div>
+        <div className="absolute top-20 right-20 text-4xl text-[#8b6914]">𓆣</div>
+        <div className="absolute bottom-20 left-20 text-5xl text-[#8b6914]">𓁹</div>
+        <div className="absolute bottom-10 right-10 text-6xl text-[#8b6914]">𓊝</div>
       </div>
 
       <div className="relative z-10 container mx-auto px-4 py-8">
@@ -160,7 +163,7 @@ Réponds à cette question en restant dans ton rôle d'Oracle Égyptien, en fais
             </h1>
             <span className="text-[#d4a84b] text-2xl">𓂀</span>
           </div>
-          <p className="text-[#8b7355] font-serif italic">
+          <p className="text-[#6b4423] font-serif italic">
             Consultez les anciens dieux pour éclairer votre chemin
           </p>
         </motion.div>
@@ -171,7 +174,7 @@ Réponds à cette question en restant dans ton rôle d'Oracle Égyptien, en fais
             <Button
               onClick={resetReading}
               variant="outline"
-              className="border-[#d4a84b]/30 text-[#d4a84b] hover:bg-[#d4a84b]/10"
+              className="border-[#8b6914] text-[#6b4423] hover:bg-[#8b6914]/10 bg-white/50"
             >
               <RefreshCw className="w-4 h-4 mr-2" />
               Nouvelle Consultation
@@ -186,10 +189,10 @@ Réponds à cette question en restant dans ton rôle d'Oracle Égyptien, en fais
             animate={{ opacity: 1, scale: 1 }}
             className="max-w-2xl mx-auto"
           >
-            <div className="bg-gradient-to-br from-[#2c1810]/80 to-[#1a0f0a]/80 rounded-2xl p-6 md:p-8 border border-[#d4a84b]/30 shadow-2xl shadow-amber-900/20">
+            <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 md:p-8 border-2 border-[#8b6914]/40 shadow-2xl shadow-amber-900/20">
               <div className="text-center mb-6">
-                <Eye className="w-12 h-12 text-[#d4a84b] mx-auto mb-4" />
-                <h2 className="text-xl md:text-2xl font-serif text-[#d4a84b] mb-2">
+                <Eye className="w-12 h-12 text-[#8b6914] mx-auto mb-4" />
+                <h2 className="text-xl md:text-2xl font-serif text-[#6b4423] mb-2">
                   Quelle est votre question ?
                 </h2>
                 <p className="text-[#8b7355] text-sm">
@@ -201,7 +204,7 @@ Réponds à cette question en restant dans ton rôle d'Oracle Égyptien, en fais
                 value={question}
                 onChange={(e) => setQuestion(e.target.value)}
                 placeholder="Écrivez ici votre question pour l'Oracle..."
-                className="min-h-[120px] bg-[#1a0f0a] border-[#d4a84b]/30 text-[#e8d4a8] placeholder:text-[#6b5544] focus:border-[#d4a84b] resize-none mb-4"
+                className="min-h-[120px] bg-[#fffef8] border-[#8b6914]/40 text-[#3d2914] placeholder:text-[#a89070] focus:border-[#8b6914] resize-none mb-4"
               />
               
               <Button
@@ -222,9 +225,9 @@ Réponds à cette question en restant dans ton rôle d'Oracle Égyptien, en fais
             animate={{ opacity: 1 }}
             className="max-w-4xl mx-auto"
           >
-            <div className="bg-gradient-to-br from-[#2c1810]/60 to-[#1a0f0a]/60 rounded-2xl p-6 border border-[#d4a84b]/20">
+            <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 border-2 border-[#8b6914]/30">
               <div className="text-center mb-4">
-                <p className="text-[#d4a84b] font-serif italic">
+                <p className="text-[#6b4423] font-serif italic">
                   Votre question : "{question}"
                 </p>
               </div>
@@ -245,14 +248,14 @@ Réponds à cette question en restant dans ton rôle d'Oracle Égyptien, en fais
           >
             <div className="grid md:grid-cols-2 gap-6">
               {/* Cartes tirées */}
-              <div className="bg-gradient-to-br from-[#2c1810]/60 to-[#1a0f0a]/60 rounded-2xl p-6 border border-[#d4a84b]/20">
-                <h3 className="text-[#d4a84b] font-serif text-lg mb-4 text-center">
+              <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border-2 border-[#8b6914]/30">
+                <h3 className="text-[#6b4423] font-serif text-lg mb-4 text-center">
                   Vos Cartes
                 </h3>
                 <div className="flex flex-wrap justify-center gap-4">
                   {selectedCards.map((card, index) => (
                     <div key={card.id} className="text-center">
-                      <div className="text-[#8b7355] text-xs mb-1">Position {index + 1}</div>
+                      <div className="text-[#6b4423] text-xs mb-1">Position {index + 1}</div>
                       <div className={`bg-gradient-to-br from-[#f4e4c1] to-[#d4bc8a] rounded-lg p-4 border-2 border-[#8b6914] ${card.reversed ? 'rotate-180' : ''}`}>
                         <div className="text-3xl mb-1">{card.symbol}</div>
                         <div className={`text-xs font-bold text-[#3d2914] ${card.reversed ? 'rotate-180' : ''}`}>
@@ -260,13 +263,13 @@ Réponds à cette question en restant dans ton rôle d'Oracle Égyptien, en fais
                         </div>
                       </div>
                       {card.reversed && (
-                        <div className="text-red-400 text-xs mt-1">Inversée</div>
+                        <div className="text-red-600 text-xs mt-1">Inversée</div>
                       )}
                     </div>
                   ))}
                 </div>
                 <div className="mt-4 text-center">
-                  <p className="text-[#8b7355] text-sm italic">
+                  <p className="text-[#6b4423] text-sm italic">
                     Question : "{question}"
                   </p>
                 </div>

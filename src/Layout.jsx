@@ -5,14 +5,14 @@ import { Scroll, History } from 'lucide-react';
 
 export default function Layout({ children, currentPageName }) {
   return (
-    <div className="min-h-screen bg-[#0d0705]">
+    <div className="min-h-screen bg-[#f4e4c1]">
       {/* Navigation */}
-      <nav className="bg-gradient-to-r from-[#1a0f0a] via-[#2c1810] to-[#1a0f0a] border-b border-[#d4a84b]/20 sticky top-0 z-50">
+      <nav className="bg-gradient-to-r from-[#d4bc8a] via-[#e8d4a8] to-[#d4bc8a] border-b-2 border-[#8b6914]/30 sticky top-0 z-50 shadow-md">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-14">
             <Link 
               to={createPageUrl('Oracle')}
-              className="flex items-center gap-2 text-[#d4a84b] hover:text-[#ffd700] transition-colors"
+              className="flex items-center gap-2 text-[#6b4423] hover:text-[#8b6914] transition-colors"
             >
               <span className="text-xl">𓂀</span>
               <span className="font-serif font-bold">Oracle d'Égypte</span>
@@ -23,8 +23,8 @@ export default function Layout({ children, currentPageName }) {
                 to={createPageUrl('Oracle')}
                 className={`flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors ${
                   currentPageName === 'Oracle' 
-                    ? 'bg-[#d4a84b]/20 text-[#ffd700]' 
-                    : 'text-[#8b7355] hover:text-[#d4a84b]'
+                    ? 'bg-[#8b6914]/20 text-[#6b4423] font-medium' 
+                    : 'text-[#8b7355] hover:text-[#6b4423]'
                 }`}
               >
                 <Scroll className="w-4 h-4" />
@@ -34,8 +34,8 @@ export default function Layout({ children, currentPageName }) {
                 to={createPageUrl('History')}
                 className={`flex items-center gap-2 px-3 py-1.5 rounded-lg transition-colors ${
                   currentPageName === 'History' 
-                    ? 'bg-[#d4a84b]/20 text-[#ffd700]' 
-                    : 'text-[#8b7355] hover:text-[#d4a84b]'
+                    ? 'bg-[#8b6914]/20 text-[#6b4423] font-medium' 
+                    : 'text-[#8b7355] hover:text-[#6b4423]'
                 }`}
               >
                 <History className="w-4 h-4" />
