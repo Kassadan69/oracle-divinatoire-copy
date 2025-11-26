@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { base44 } from '@/api/base44Client';
 import CardDeck from '@/components/oracle/CardDeck';
+import CardRevealPhase from '@/components/oracle/CardRevealPhase';
+import CardShufflePhase from '@/components/oracle/CardShufflePhase';
 import ChatDialog from '@/components/oracle/ChatDialog';
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { RefreshCw, Eye } from 'lucide-react';
 
 export default function Oracle() {
   const [question, setQuestion] = useState('');
-  const [phase, setPhase] = useState('question'); // question, cards, interpretation
+  const [numberOfCards, setNumberOfCards] = useState(3);
+  const [phase, setPhase] = useState('question'); // question, reveal, shuffle, cards, interpretation
   const [selectedCards, setSelectedCards] = useState([]);
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -17,8 +21,16 @@ export default function Oracle() {
 
   const handleQuestionSubmit = () => {
     if (!question.trim()) return;
-    setPhase('cards');
+    setPhase('reveal');
   };
+
+  const handleRevealComplete = useCallback(() => {
+    setPhase('shuffle');
+  }, []);
+
+  const handleShuffleComplete = useCallback(() => {
+    setPhase('cards');
+  }, []);
 
   const handleCardsSelected = async (cards) => {
     setSelectedCards(cards);
@@ -206,6 +218,24 @@ Réponds à cette question en restant dans ton rôle d'Oracle Égyptien, en fais
                 placeholder="Écrivez ici votre question pour l'Oracle..."
                 className="min-h-[120px] bg-[#fffef8] border-[#8b6914]/40 text-[#3d2914] placeholder:text-[#a89070] focus:border-[#8b6914] resize-none mb-4"
               />
+
+              {/* Sélection du nombre de cartes */}
+              <div className="mb-4">
+                <label className="block text-[#6b4423] font-serif text-sm mb-2">
+                  Nombre de cartes à tirer :
+                </label>
+                <Select value={String(numberOfCards)} onValueChange={(val) => setNumberOfCards(Number(val))}>
+                  <SelectTrigger className="bg-[#fffef8] border-[#8b6914]/40 text-[#3d2914]">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="1">1 carte - Réponse directe</SelectItem>
+                    <SelectItem value="3">3 cartes - Passé, Présent, Futur</SelectItem>
+                    <SelectItem value="5">5 cartes - Tirage approfondi</SelectItem>
+                    <SelectItem value="7">7 cartes - Grande consultation</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
               
               <Button
                 onClick={handleQuestionSubmit}
@@ -218,7 +248,33 @@ Réponds à cette question en restant dans ton rôle d'Oracle Égyptien, en fais
           </motion.div>
         )}
 
-        {/* Phase 2: Tirage des cartes */}
+        {/* Phase 2: Observation des cartes */}
+        {phase === 'reveal' && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="max-w-4xl mx-auto"
+          >
+            <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 border-2 border-[#8b6914]/30">
+              <CardRevealPhase onComplete={handleRevealComplete} />
+            </div>
+          </motion.div>
+        )}
+
+        {/* Phase 3: Mélange des cartes */}
+        {phase === 'shuffle' && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="max-w-4xl mx-auto"
+          >
+            <div className="bg-white/60 backdrop-blur-sm rounded-2xl p-6 border-2 border-[#8b6914]/30">
+              <CardShufflePhase onComplete={handleShuffleComplete} />
+            </div>
+          </motion.div>
+        )}
+
+        {/* Phase 4: Sélection des cartes */}
         {phase === 'cards' && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -233,7 +289,7 @@ Réponds à cette question en restant dans ton rôle d'Oracle Égyptien, en fais
               </div>
               <CardDeck 
                 onCardsSelected={handleCardsSelected}
-                numberOfCards={3}
+                numberOfCards={numberOfCards}
               />
             </div>
           </motion.div>
