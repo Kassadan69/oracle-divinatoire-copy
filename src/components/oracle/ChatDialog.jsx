@@ -71,7 +71,7 @@ export default function ChatDialog({
                         em: ({ children }) => <em className="text-[#e8d4a8] italic">{children}</em>,
                       }}
                     >
-                      {message.content}
+                      {String(message.content || '')}
                     </ReactMarkdown>
                   </div>
                 </div>

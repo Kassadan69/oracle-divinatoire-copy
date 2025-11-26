@@ -93,8 +93,7 @@ export default function History() {
                       <ScrollArea className="max-h-48">
                         <div className="prose prose-sm prose-invert max-w-none text-[#c9b896]">
                           <ReactMarkdown>
-                            {reading.interpretation?.substring(0, 500)}
-                            {reading.interpretation?.length > 500 ? '...' : ''}
+                            {String(reading.interpretation || '').substring(0, 500) + (String(reading.interpretation || '').length > 500 ? '...' : '')}
                           </ReactMarkdown>
                         </div>
                       </ScrollArea>
