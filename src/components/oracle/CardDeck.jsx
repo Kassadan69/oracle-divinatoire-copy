@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import EgyptianCard, { EGYPTIAN_CARDS } from './EgyptianCard';
 
@@ -8,7 +8,6 @@ export default function CardDeck({
   disabled = false 
 }) {
   const [cards] = useState(() => {
-    // Mélanger les cartes aléatoirement
     const shuffled = [...EGYPTIAN_CARDS];
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -17,10 +16,10 @@ export default function CardDeck({
     return shuffled;
   });
   const [selectedCards, setSelectedCards] = useState([]);
-  const [revealedCards, setRevealedCards] = useState([]);
+  const [allRevealed, setAllRevealed] = useState(false);
 
   const selectCard = (cardIndex) => {
-    if (selectedCards.length >= numberOfCards) return;
+    if (selectedCards.length >= numberOfCards || allRevealed) return;
     
     const card = cards[cardIndex];
     if (selectedCards.some(s => s.id === card.id)) return;
@@ -28,15 +27,15 @@ export default function CardDeck({
     const reversed = Math.random() < 0.3;
     const newSelected = [...selectedCards, { ...card, reversed, position: selectedCards.length + 1 }];
     setSelectedCards(newSelected);
-    
-    setTimeout(() => {
-      setRevealedCards(prev => [...prev, card.id]);
-    }, 300);
 
+    // Quand toutes les cartes sont sélectionnées, les retourner
     if (newSelected.length === numberOfCards) {
       setTimeout(() => {
-        onCardsSelected(newSelected);
-      }, 1000);
+        setAllRevealed(true);
+        setTimeout(() => {
+          onCardsSelected(newSelected);
+        }, 1500);
+      }, 500);
     }
   };
 
@@ -67,11 +66,12 @@ export default function CardDeck({
                 </div>
                 <EgyptianCard
                   card={card}
-                  isFlipped={revealedCards.includes(card.id)}
+                  isFlipped={allRevealed}
                   reversed={card.reversed}
-                  showName={revealedCards.includes(card.id)}
+                  showName={allRevealed}
                   size="large"
                   disabled
+                  isHighlighted={!allRevealed}
                 />
               </motion.div>
             ))}

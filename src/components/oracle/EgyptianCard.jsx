@@ -33,6 +33,7 @@ export default function EgyptianCard({
   card, 
   isFlipped = false, 
   isSelected = false,
+  isHighlighted = false,
   onClick,
   disabled = false,
   size = "normal",
@@ -71,10 +72,13 @@ export default function EgyptianCard({
         <div 
           className={cn(
             "absolute inset-0 rounded-lg",
-            "bg-gradient-to-br from-[#1a0f0a] via-[#2c1810] to-[#0d0705]",
-            "border-2 border-[#d4a84b]",
+            isHighlighted 
+              ? "bg-gradient-to-br from-[#0a0503] via-[#1a0f0a] to-[#050302]"
+              : "bg-gradient-to-br from-[#1a0f0a] via-[#2c1810] to-[#0d0705]",
+            "border-2",
+            isHighlighted ? "border-[#ffd700]" : "border-[#d4a84b]",
             "flex items-center justify-center",
-            "shadow-lg shadow-amber-900/50",
+            isHighlighted ? "shadow-xl shadow-amber-500/50" : "shadow-lg shadow-amber-900/50",
             isSelected && "ring-2 ring-[#ffd700] ring-offset-2 ring-offset-[#1a0f0a]"
           )}
           style={{ backfaceVisibility: "hidden" }}
